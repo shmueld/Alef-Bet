@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title>גלגל האלף בית</title>
+
+        <style type="text/css">
+            body{
+                font-family:arial,sans-serif;
+                border: 0px solid black;
+                align-self: center;
+                justify-content: center;
+                margin: 150 50;
+                display: flex;
+                flex-direction: column;
+            }
+            h1{
+                text-align:center
+            }
+            .mainContainer {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+            .arrowBox {
+                font-weight: bolder;
+                background-color: rgb(201, 201, 201);
+                font-size: 30px;
+                padding: 30px 0;
+                cursor: pointer;
+                
+            }
+            .helpContainer{
+                text-align: center;
+                direction: rtl;
+                
+            }
+            .charBox {
+                width: 200px;
+                height: 220px;
+                font-size: 200px;
+                border: 1px solid black;
+                border-radius: 30px;
+                text-align: center;
+            }
+            .niqqudBox{
+                width: 200px;
+                height: 150px;
+                font-size: 100px;
+                border-radius: 30px;
+                border: 1px solid black;
+                text-align: center;
+                text-justify: top;
+                direction: rtl;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h1>גלגל האותיות</h1>
+        <div class="mainContainer">
+            <div class="arrowBox" onclick="nextChar();">&lArr;</div><div class="charBox" id="charBoxDiv">א</div><div class="arrowBox" onclick="previousChar();">&rArr;</div>
+        </div>
+        <div class="mainContainer">
+            <div class="arrowBox" onclick="nextNiqqud();">&lArr;</div><div class="niqqudBox" id="niqqudBoxDiv"> ָ</div><div class="arrowBox" onclick="previousNiqqud();">&rArr;</div>
+        </div>
+        <br />
+        <div class="helpContainer">
+            <h3>הוראות הפעלה</h3>
+            למעבר בין האותיות/נקודות יש ללחוץ על החיצים.<br /><br />
+            ניתן להפעיל גם באמצעות מקשי החצים במקלדת: <br />
+            המקשים: ימין ושמאל למעבר בין האותיות<br />
+            המקשים: למעלה ומטה למעבר בין הנקודות
+        </div>
+    </body>
+    <script type="text/javascript">
+        const alefBetArr = ["א","בּ","ב", "ג","ד","ה","ו","ז","ח","ט","י","כּ","כ","ל","מ","נ","ס","ע","פּ","פ","צ","ק","ר","שׁ","שׂ","תּ","ת"];
+        const niqqudArr = ["ְ","ִ","ֵ","ֶ","ַ","ָ","ֹ","ּ","ֻ","ֱ","ֲ","ֳ"]
+        let alefBetIndex = 0;
+        let niqqudIndex = 0;
+
+        document.addEventListener("keyup", (e)=> {
+            switch(e.code){
+                case "KeyE":
+                case "ArrowLeft":
+                    nextChar();
+                    break;
+                case "KeyT":
+                case "ArrowRight":
+                    previousChar();
+                    break;
+                case "KeyZ":
+                case "ArrowUp":
+                    nextNiqqud();
+                    break;
+                case "KeyX":
+                case "ArrowDown":
+                    previousNiqqud();
+                    break;
+
+            }
+        })
+        function nextChar(){
+            alefBetIndex++;
+
+            if (alefBetIndex == alefBetArr.length)
+                alefBetIndex = 0;
+
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex];
+        }
+        function previousChar() {
+            alefBetIndex--;
+
+            if (alefBetIndex == -1)
+                alefBetIndex = alefBetArr.length-1;
+                
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex];
+        }
+        function nextNiqqud() {
+            niqqudIndex++;
+
+            if (niqqudIndex == niqqudArr.length)
+                niqqudIndex = 0;
+
+            document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
+        }
+        function previousNiqqud(){
+            niqqudIndex--;
+
+            if (niqqudIndex == -1)
+                niqqudIndex = niqqudArr.length-1;
+
+            document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
+        }
+    </script>
+</html>
