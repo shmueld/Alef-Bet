@@ -1,10 +1,13 @@
 <html>
     <head>
         <title>גלגל האלף בית</title>
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Hebrew:wght@700&display=swap" rel="stylesheet">
         <style type="text/css">
             body{
-                font-family:arial,sans-serif;
+                font-family: arial;
                 border: 0px solid black;
                 align-self: center;
                 justify-content: center;
@@ -35,14 +38,19 @@
                 
             }
             .charBox {
+                font-family: 'Inter';
+                
+
                 width: 200px;
-                height: 220px;
+                height: 300px;
                 font-size: 200px;
                 border: 1px solid black;
                 border-radius: 30px;
                 text-align: center;
             }
             .niqqudBox{
+                font-family: 'Noto Sans Hebrew', sans-serif;
+                margin-top: 25px;
                 width: 200px;
                 height: 150px;
                 font-size: 100px;
@@ -74,10 +82,12 @@
     </body>
     <script type="text/javascript">
         const alefBetArr = ["א","בּ","ב", "ג","ד","ה","ו","ז","ח","ט","י","כּ","כ","ל","מ","נ","ס","ע","פּ","פ","צ","ק","ר","שׁ","שׂ","תּ","ת"];
-        const niqqudArr = ["ְ","ִ","ֵ","ֶ","ַ","ָ","ֹ","ּ","ֻ","ֱ","ֲ","ֳ"]
-        
+        const niqqudArr = ["ָ","ַ","ֵ","ִ","ֶ","ְ","ֹ","ֻ","ֱ","ֲ","ֳ"] //"ּ",
+
         let alefBetIndex = 0;
         let niqqudIndex = 0;
+
+        document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex];
 
         document.addEventListener("keyup", (e)=> {
             switch(e.code){
@@ -106,7 +116,7 @@
             if (alefBetIndex == alefBetArr.length)
                 alefBetIndex = 0;
 
-            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex];
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex];
         }
         function previousChar() {
             alefBetIndex--;
@@ -114,7 +124,7 @@
             if (alefBetIndex == -1)
                 alefBetIndex = alefBetArr.length-1;
                 
-            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex];
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex];
         }
         function nextNiqqud() {
             niqqudIndex++;
@@ -123,6 +133,7 @@
                 niqqudIndex = 0;
 
             document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex]
         }
         function previousNiqqud(){
             niqqudIndex--;
@@ -131,6 +142,7 @@
                 niqqudIndex = niqqudArr.length-1;
 
             document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex]
         }
     </script>
 </html>
