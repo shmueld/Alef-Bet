@@ -1,10 +1,10 @@
 <html>
     <head>
-        <title>תצוגת אותיות האלף בית עם ניקוד</title>
+        <title>משפחה בתנועה</title>
         <meta name="description" content="תצוגת אותיות האלף בית עם ניקוד" />
-        <meta property="og:title" content="תצוגת אותיות האלף בית עם ניקוד" />
+        <meta property="og:title" content="משפחה בתנועה" />
         <meta property="og:url" content="https://https://shmueld.github.io/Alef-Bet/" />
-        <meta property="og:description" content="תצוגת אותיות האלף בית עם ניקוד" />
+        <meta property="og:description" content="משפחה בתנועה" />
         <meta property="og:locale" content="he_IL" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="assest/apple-touch-icon.png">
@@ -21,12 +21,16 @@
                 border: 0px solid black;
                 align-self: center;
                 justify-content: center;
-                margin: 150 50;
                 display: flex;
                 flex-direction: column;
             }
             h1{
-                text-align:center
+                text-align:center;
+                margin: 5px 0px 5px 0px;
+            }
+            h2{
+                text-align:center;
+                margin: 5px 0px 5px 0px;
             }
             .mainContainer {
                 display: flex;
@@ -50,11 +54,13 @@
             .charBox {
                 font-family: 'Inter';
                 width: 200px;
-                height: 300px;
+                height: 250px;
                 font-size: 200px;
                 border: 1px solid black;
                 border-radius: 30px;
                 text-align: center;
+                align-content: center;
+                justify-content: center;    
             }
             .niqqudBox{
                 font-family: 'Noto Sans Hebrew', sans-serif;
@@ -72,7 +78,10 @@
         </style>
     </head>
     <body>
-        <h1>גלגל האותיות</h1>
+            <img src="assest/kid1.png" style="position:absolute;top:25vh;left:60vw;height: 400px;"/>
+            <img src="assest/kid2.png" style="position:absolute;top:25vh;left:30vw;height: 400px;"/>
+        <h1>משפחה בתנועה</h1>
+        <h2>גלגל האותיות</h2>
         <div class="mainContainer">
             <div class="arrowBox" onclick="nextChar();">&lArr;</div><div class="charBox" id="charBoxDiv">א</div><div class="arrowBox" onclick="previousChar();">&rArr;</div>
         </div>
@@ -81,6 +90,7 @@
         </div>
         <br />
         <div class="helpContainer">
+            <h2>גלגל האותיות</h2>
             <h3>הוראות הפעלה</h3>
             למעבר בין האותיות/נקודות יש ללחוץ על החיצים.<br /><br />
             ניתן להפעיל גם באמצעות מקשי החצים במקלדת: <br />
@@ -118,13 +128,25 @@
 
             }
         })
+        function getRandomColor(){
+            return Math.floor(Math.random()*16777215).toString(16);
+
+        }
+        function doChange(alerBetIndex, niqqudIndex){
+            document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
+            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex]
+            var color = "#"+getRandomColor()
+            document.getElementById("charBoxDiv").style.color = color
+            document.getElementById("niqqudBoxDiv").style.color=color
+        }
         function nextChar(){
             alefBetIndex++;
 
             if (alefBetIndex == alefBetArr.length)
                 alefBetIndex = 0;
 
-            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex];
+            doChange(alefBetIndex, niqqudIndex);
+
         }
         function previousChar() {
             alefBetIndex--;
@@ -132,7 +154,7 @@
             if (alefBetIndex == -1)
                 alefBetIndex = alefBetArr.length-1;
                 
-            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex];
+            doChange(alefBetIndex, niqqudIndex);
         }
         function nextNiqqud() {
             niqqudIndex++;
@@ -140,8 +162,7 @@
             if (niqqudIndex == niqqudArr.length)
                 niqqudIndex = 0;
 
-            document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
-            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex]
+            doChange(alefBetIndex, niqqudIndex);
         }
         function previousNiqqud(){
             niqqudIndex--;
@@ -149,8 +170,7 @@
             if (niqqudIndex == -1)
                 niqqudIndex = niqqudArr.length-1;
 
-            document.getElementById("niqqudBoxDiv").innerText = niqqudArr[niqqudIndex];
-            document.getElementById("charBoxDiv").innerText = alefBetArr[alefBetIndex] + niqqudArr[niqqudIndex]
+            doChange(alefBetIndex, niqqudIndex);
         }
     </script>
 </html>
